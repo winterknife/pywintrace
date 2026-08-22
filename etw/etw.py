@@ -427,7 +427,7 @@ class EventConsumer:
             property_size = wt.DWORD()
             count = wt.DWORD()
 
-            data_descriptor.PropertyName = info + event_property_array[j].NameOffset
+            data_descriptor.PropertyName = ct.cast(info, ct.c_voidp).value + event_property_array[j].NameOffset
             data_descriptor.ArrayIndex = MAX_UINT
 
             status = tdh.TdhGetPropertySize(record, 0, None, 1, ct.byref(data_descriptor), ct.byref(property_size))
