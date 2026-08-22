@@ -491,6 +491,9 @@ class EventConsumer:
         if (in_type == tdh.TDH_INTYPE_BINARY) and (out_type == tdh.TDH_OUTTYPE_IPV6):
             return ct.sizeof(ia.IN6_ADDR)
 
+        if in_type == tdh.TDH_INTYPE_BOOLEAN:
+            return 4
+
         return event_property.epi_u3.length
 
     @staticmethod
