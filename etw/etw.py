@@ -741,11 +741,11 @@ class EventConsumer:
                 event_property_array = ct.cast(info.contents.EventPropertyInfoArray,
                                                ct.POINTER(tdh.EVENT_PROPERTY_INFO))
 
-                key, value = self._unpackSimpleType(record, info, event_property_array[j])
-                if key is None and value is None:
+                result = self._unpackSimpleType(record, info, event_property_array[j])
+                if not result:
                     break
 
-                out[key] = value
+                out.update(result)
 
         return out
 
