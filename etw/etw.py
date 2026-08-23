@@ -577,6 +577,12 @@ class EventConsumer:
 
         in_type = event_property.epi_u1.nonStructType.InType
         out_type = event_property.epi_u1.nonStructType.OutType
+        
+        if in_type == tdh.TDH_INTYPE_BOOLEAN:
+            bool_val = any(ct.string_at(user_data, property_length))
+            self.index += property_length
+            return {name_field: bool_val}
+            
         formatted_data_size = wt.DWORD()
         formatted_data = wt.LPWSTR()
         user_data_consumed = ct.c_ushort()
