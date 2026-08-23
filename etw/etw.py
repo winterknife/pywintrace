@@ -609,7 +609,7 @@ class EventConsumer:
 
         if status != tdh.ERROR_SUCCESS:
             # We can handle this error and still capture the data.
-            logger.warning('Failed to get data field data for {:s}, incrementing by reported size'.format(name_field))
+            logger.warning('Failed for {:s}: status=0x{:x} in_type={} out_type={} property_length={} user_data_remaining={}'.format(name_field, status, in_type, out_type, property_length, user_data_remaining))
             self.index += property_length
             return {name_field: None}
 
