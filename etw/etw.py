@@ -434,10 +434,10 @@ class EventConsumer:
             if tdh.ERROR_SUCCESS != status:
                 raise ct.WinError(status)
 
-            status = tdh.TdhGetProperty(record, 0, None, 1, ct.byref(data_descriptor), property_size, ct.byref(count))
+            status = tdh.TdhGetProperty(record, 0, None, 1, ct.byref(data_descriptor), property_size, ct.cast(ct.byref(count), ct.POINTER(ct.c_byte)))
             if tdh.ERROR_SUCCESS != status:
                 raise ct.WinError(status)
-            return count
+            return count.value
 
         if flags & tdh.PropertyParamFixedCount:
             raise ETWException('PropertyParamFixedCount not supported')
