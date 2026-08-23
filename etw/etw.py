@@ -492,7 +492,7 @@ class EventConsumer:
             return ct.sizeof(ia.IN6_ADDR)
 
         if in_type == tdh.TDH_INTYPE_BOOLEAN:
-            return 4
+            return 1
 
         return event_property.epi_u3.length
 
