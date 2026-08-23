@@ -491,9 +491,6 @@ class EventConsumer:
         if (in_type == tdh.TDH_INTYPE_BINARY) and (out_type == tdh.TDH_OUTTYPE_IPV6):
             return ct.sizeof(ia.IN6_ADDR)
 
-        if in_type == tdh.TDH_INTYPE_BOOLEAN:
-            return 1
-
         return event_property.epi_u3.length
 
     @staticmethod
@@ -579,7 +576,8 @@ class EventConsumer:
         out_type = event_property.epi_u1.nonStructType.OutType
         
         if in_type == tdh.TDH_INTYPE_BOOLEAN:
-            bool_val = any(ct.string_at(user_data, property_length))
+            n = min(property_length, user_data_remaining)
+            bool_val = any(ct.string_at(user_data, n))
             self.index += property_length
             return {name_field: bool_val}
             
